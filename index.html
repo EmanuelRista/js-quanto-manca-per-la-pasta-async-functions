@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <label for="time-pasta">Qual'è il tempo di cottura della pasta in secondi?</label>
+    <input type="text" name="time-pasta" id="time-pasta"placeholder="es. 30" value="">
+    <button type="button" id="start-timer" name="button">Start timer</button>
+    <p id="the-time"></p>
+    <p id="minutes-left"></p>
+    <script type="text/javascript">
+    document.getElementById('start-timer').addEventListener("click", startTheTime);//quando clicco su Start Timer, si attiva la funzione Start The Time
+    function startTheTime() {//la funzione startTheTime
+      var timeleft = document.getElementById("time-pasta").value;//timeleft è uguale al valore che l'utente inserisce nei campo dei secondi (time-pasta)
+      if(isNaN(timeleft)) {//se il valore inserito non è un numero
+        alert("Attenzione: devi inserire un numero")//allora sgridalo
+      } else {//diversamente
+        var downloadTimer = setInterval(function(){//funzione countdown//attiva un countdown di tanti secondi quanto è il valore inserito nell'input time-pasta
+          timeleft--;
+          document.getElementById("the-time").textContent = timeleft;
+          if(timeleft <= 0)
+          clearInterval(downloadTimer);
+        },1000);
+
+        function displayAlert() {//quando si attiva la funzione display alert
+          alert("La pasta è pronta!");//allora manda un alert che dica che la pasta è pronta
+        }
+        setTimeout(displayAlert, timeleft+0+0+0);//attiva la funzione displayAlert dopo tanti secondi quanto è il valore dell'input time-pasta (attenzione: essendo che 1 secondo = 1000, non basta tenere come tempo timeleft, bisogna aggiungergli tre zeri. Es. se timeleft è 15, sarà quindi 15+0+0+0, il più è di concatenazione)
+      }
+    };
+    </script>
+  </body>
+</html>
